@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset=""UTF-8">
+    <title>Für Elise</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans">
+  </head>
+  <body>
+    <h3>Off-the-Job <dfn>(OtJ)</dfn> Hours Calculator<br>
+      <small>(for recording in Smart Assessor)</small></h3>
+    <form>
+      <contract>
+        <div class="form-pair">
+          <label for="course-duration">Course Duration<br>(weeks)</label>
+          <input name="course-duration" id="course-duration" class="weeks" 
+                 type="number" step="1" min="0" value="78"
+                 onblur="calcMinimumHours()">
+        </div>
+        <div class="form-pair">
+          <label for="contract-hours">Contracted Hours<br>(a week)</label>
+          <input name="contract-hours" id="contract-hours" class="hours" 
+                 type="number" step="0.1" min="0" max="168" value="40.0"
+                 onblur="calcMinimumHours()">
+        </div>
+        <div class="form-pair">
+          <label for="holiday-hours">Total Holiday<br>(hours)</label>
+          <input name="holiday-hours" id="holiday-hours" class="hours" 
+                 type="number" step="0.1" min="0" value="224.0"
+                 onblur="calcMinimumHours()">
+        </div>
+        <div class="form-pair">
+          <label for="minimum-otj-percent">Minimum 
+            <abbr title="Off-the-Job">OtJ</abbr> Time<br>(%)</label>
+          <input name="minimum-otj-percent" id="minimum-otj-percent" class="percent" 
+                 type="number" step="10" min="0" max="100" value="20"
+                 onblur="calcMinimumHours()">
+        </div>
+      </contract>
+      <planned>
+        <div class="form-pair">
+          <label for="planned-hours">Total Planned<br>
+            <abbr title="Off-the-Job">OtJ</abbr> Hours</label>
+          <input name="planned-hours" id="planned-hours" class="hours" 
+                 type="number" step="0.1" min="0" value="760.0">
+        </div>
+      </planned>
+      <calc>
+        <div class="form-pair">
+          <label for="minimum-hours">Total Minimum<br>
+            <abbr title="Off-the-Job">OtJ</abbr> Hours</label>
+          <input name="minimum-hours" id="minimum-hours" class="hours" 
+                 type="number" step="0.1" min="0" value="579.2" 
+                 readonly>
+        </div>
+        <div class="form-pair">
+          <input name="check-button" id="check-button" 
+                 type="button" value="Calculate hours a week"
+                 onclick="adjustContractHours()">
+        </div>
+      </calc>
+    </form>
+
+    <!--
+      * Inline script/style for simplicity of single .html file (for now!)
+    -->
+    <script>
+      function calcMinimumHours() {
+        const durationWeeks = document.getElementById("course-duration").value;
+        const contractHours = document.getElementById("contract-hours").value;
+        const holidayHours = document.getElementById("holiday-hours").value;
+        const minimumHoursAsPercent = 
+              document.getElementById("minimum-otj-percent").value;
+        const holidayHoursPerWeek = holidayHours / durationWeeks;
+        
+        document.getElementById("minimum-hours").value = 
+          (minimumHoursAsPercent * 0.01 * (contractHours - holidayHoursPerWeek) * durationWeeks).toFixed(1);
+      }
+
+      function adjustContractHours() {
+        const plannedHours = document.getElementById("planned-hours").value;
+        const holidayHours = document.getElementById("holiday-hours").value;
+        const durationWeeks = document.getElementById("course-duration").value;
+        const holidayHoursPerWeek = holidayHours / durationWeeks;
+        const minimumHoursAsPercent = 
+              document.getElementById("minimum-otj-percent").value;
+        
+        document.getElementById("contract-hours").value = 
+          ((plannedHours / minimumHoursAsPercent / 0.01 / durationWeeks) + holidayHoursPerWeek).toFixed(1);
+        calcMinimumHours();
+      }
+    </script>
+    <style>
+      /* global variables */
+      :root {
+        --lsecpink: #ec008c;
+      }
+
+      /* master elements */
+      html {
+        font-family: "Nunito Sans", sans-serif;
+        font-size: 100%;
+      }
+      body {
+        
+        color: #0a0a0a;
+        margin-left: 1.5ch;
+      }
+      h3 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        line-height: 1.4rem;
+        margin: 0.5em 0 0.5em;
+        text-transform: uppercase;
+        min-width: 15rem;
+      }
+      abbr, dfn {
+        font-style: normal;
+        text-decoration: none;
+      }
+      abbr {
+        cursor: help;
+      }
+      small {
+        font-size: 0.7em;
+        text-transform: none;
+      }
+
+      /* form formatting */
+      form {
+        border-left-width: 4px;
+        border-left-style: solid;
+        border-left-color: var(--lescpink);
+      }
+      div.form-pair {
+        align-items: center;
+        display: flex;
+        height: auto;
+        gap: 2ch;
+        justify-content: center;
+        line-height: 1.3;
+        margin-bottom: 1rem;
+        padding: 0.5ch 1ch 0.5ch 1ch;
+      }
+      label {
+        min-width: 7rem;
+        text-align: center;
+        width: 60%;
+      }
+      input {
+        background-color: #ebebeb;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        height: 2.5em;
+        width: 40%;
+      }
+      div.form-pair #check-button {
+        display: flex;
+        margin: 0;
+        padding: 1.5ch;
+        width: auto;
+      }
+    </style>
+  </body>
+</html>
