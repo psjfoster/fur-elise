@@ -61,51 +61,44 @@
       * Inline script/style for simplicity of single .html file (for now!)
     -->
     <script>
-      const annualHolidayHours = 0;
-      const contractHours = 0;
-      const durationWeeks = 0;
-      const minimumHoursAsPercent = 0;
-      const plannedHours = 0;
-
-      const calcHolidayHours = 0;
-      const minimumHoursMultiplier = 0;
-
-      function getValues() {
-        annualHolidayHours = document.getElementById("annual-holiday-hours").value;
-        contractHours = document.getElementById("contract-hours").value;
-        durationWeeks = document.getElementById("course-duration").value;
-        minimumHoursAsPercent = document.getElementById("minimum-otj-percent").value;
-
-        calcHolidayHours = annualHolidayHours * (durationWeeks / 52);        
-        minimumHoursMultiplier = (minimumHoursAsPercent / 100);
-      }
-      
       function calcMinimumHours() {
-        getValues();
+        const annualHolidayHours = document.getElementById("annual-holiday-hours").value;
+        const contractHours = document.getElementById("contract-hours").value;
+        const durationWeeks = document.getElementById("course-duration").value;
+        
+        const calcHolidayHours = annualHolidayHours * (durationWeeks / 52);
+        const minimumHoursMultiplier = 
+          document.getElementById("minimum-otj-percent").value / 100;
+
         document.getElementById("minimum-hours").value = 
-          (((contractHours * durationWeeks) - calcHolidayHours) * minimumHoursMultiplier).toFixed(1);
+            (((contractHours * durationWeeks) - calcHolidayHours) * minimumHoursMultiplier).toFixed(1);
       }
 
       function adjustContractHours() {
-        getValues();
-        calcMinimumHours();
-        plannedHours = document.getElementById("planned-hours").value;
-        
-        document.getElementById("contract-hours").value = 
-          (((plannedHours / minimumHoursMultiplier) + calcHolidayHours) / durationWeeks).toFixed(1);
-        
+        const annualHolidayHours = document.getElementById("annual-holiday-hours").value;
+        const contractHours = document.getElementById("contract-hours").value;
+        const durationWeeks = document.getElementById("course-duration").value;
+
+        const calcHolidayHours = annualHolidayHours * (durationWeeks / 52);
+        const minimumHoursMultiplier = 
+            document.getElementById("minimum-otj-percent").value / 100;
+
+        const plannedHours = document.getElementById("planned-hours").value;
+
         // conditional checks in future?
+        document.getElementById("contract-hours").value = 
+            (((plannedHours / minimumHoursMultiplier) + calcHolidayHours) / durationWeeks).toFixed(1);
+        calcMinimumHours();
         animateSuccess();
       }
 
       function animateSuccess() {
         const contract = document.getElementById("contract");
-
         contract.classList.remove("success");
         
         /* void triggers "reflow" */
         void contract.offsetWidth
-        
+
         contract.classList.add("success"); 
       }
     </script>
@@ -143,7 +136,7 @@
 
       /* form formatting */
       form {
-        border-left: 4px solid #C00072;
+        border-left: 4px solid #ec008c;
       }
       form div {
         align-items: center;
@@ -171,7 +164,7 @@
         width: 6em;
       }
       input:focus {
-        outline-color: #C00072;
+        outline-color: #ec008c      ;
       }
       input[readonly] {
         background-color: #fde6f4;
@@ -188,7 +181,7 @@
         width: auto;
       }
       button:active {
-        color: #fde6f4;
+        color: #ebebeb;
         transform: translate(0, 1px);
       }
       .success * {
