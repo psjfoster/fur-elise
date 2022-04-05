@@ -5,12 +5,17 @@
     <meta name="author" content="Paul Greedo Foster">
     <meta name="viewport" content="width=device-width">
     <title>Für Elise</title>
+    <link rel="stylesheet" type="text/css" href="./fur-elise.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans">
   </head>
+  
   <body>
+    <script type="text/javascript" src="./fur-elise.js"></script>
+
     <h3>Off-the-Job <dfn>(OtJ)</dfn> Hours Calculator<br>
       <small>(for recording in Smart Assessor)</small>
     </h3>
+
     <form>
       <div>
         <label for="course-duration">Course Duration<br>(weeks)</label>
@@ -56,146 +61,5 @@
           Calculate hours a week</button>
       </div>
     </form>
-
-    <!--
-      * Inline script/style for simplicity of single .html file (for now!)
-    -->
-    <script>
-      function calcMinimumHours() {
-        const annualHolidayHours = document.getElementById("annual-holiday-hours").value;
-        const contractHours = document.getElementById("contract-hours").value;
-        const durationWeeks = document.getElementById("course-duration").value;
-        
-        const calcHolidayHours = annualHolidayHours * (durationWeeks / 52);
-        const minimumHoursMultiplier = 
-          document.getElementById("minimum-otj-percent").value / 100;
-
-        document.getElementById("minimum-hours").value = 
-            (((contractHours * durationWeeks) - calcHolidayHours) * minimumHoursMultiplier).toFixed(1);
-      }
-
-      function adjustContractHours() {
-        const annualHolidayHours = document.getElementById("annual-holiday-hours").value;
-        const contractHours = document.getElementById("contract-hours").value;
-        const durationWeeks = document.getElementById("course-duration").value;
-
-        const calcHolidayHours = annualHolidayHours * (durationWeeks / 52);
-        const minimumHoursMultiplier = 
-            document.getElementById("minimum-otj-percent").value / 100;
-
-        const plannedHours = document.getElementById("planned-hours").value;
-
-        // conditional checks in future?
-        document.getElementById("contract-hours").value = 
-            (((plannedHours / minimumHoursMultiplier) + calcHolidayHours) / durationWeeks).toFixed(1);
-        calcMinimumHours();
-        animateSuccess();
-      }
-
-      function animateSuccess() {
-        const contract = document.getElementById("contract");
-        contract.classList.remove("success");
-        
-        /* void triggers "reflow" */
-        void contract.offsetWidth
-
-        contract.classList.add("success"); 
-      }
-    </script>
-
-    <style>
-      /* master elements */
-      html {
-        color: #545454;
-        font-family: "Nunito Sans", sans-serif;
-        font-size: 100%;
-      }
-      body {
-        margin-left: 1.5ch;
-      }
-      h3 {
-        color: #212121;
-        font-size: 1.4rem;
-        font-weight: 600;
-        line-height: 1.4rem;
-        margin: 0.5em 0 0.5em;
-        text-transform: uppercase;
-        min-width: 15rem;
-      }
-      abbr, dfn {
-        font-style: normal;
-        text-decoration: none;
-      }
-      abbr {
-        cursor: help;
-      }
-      small {
-        font-size: 0.7em;
-        text-transform: none;
-      }
-
-      /* form formatting */
-      form {
-        border-left: 4px solid #ec008c;
-      }
-      form div {
-        align-items: center;
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        line-height: 1.3rem;
-        margin-bottom: 0.2rem;
-        width: 17rem;
-        padding: 0.5rem;
-      }
-      label {
-        text-align: center;
-        width: 9rem;
-      }
-      input {
-        background-color: #ebebeb;
-        border: none;
-        border-radius: 5px;
-        display: flex;
-        flex-shrink: 0;
-        font-size: 1.1rem;
-        height: 2.2rem;
-        text-align: center;
-        width: 6em;
-      }
-      input:focus {
-        outline-color: #ec008c      ;
-      }
-      input[readonly] {
-        background-color: #fde6f4;
-        outline: none;
-      }
-      .button {
-        background-color: #C00072;
-        border: none;
-        border-radius: 5px;
-        color: #fefefe;
-        font-size: 1rem;
-        height: 2.2rem;
-        padding: 0 1.5ch;
-        width: auto;
-      }
-      button:active {
-        color: #ebebeb;
-        transform: translate(0, 1px);
-      }
-      .success * {
-        animation-delay: 2s;
-        animation-duration: 4s;
-        animation-fill-mode: backwards;
-        animation-name: success;
-      }
-
-      /* animation */
-      @keyframes success {
-        from {color: #ec008c}
-        to {color: #0e0e0e}
-      }
-    </style>
   </body>
 </html>

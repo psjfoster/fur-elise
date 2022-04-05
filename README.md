@@ -1,6 +1,7 @@
 # fur-elise
 pink #ec008c
 blue #00bdf2
+neutral #ebebeb
 
 TODO:
 [ ] split into HTML, CSS, JS
