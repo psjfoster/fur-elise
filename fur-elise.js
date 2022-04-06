@@ -1,5 +1,22 @@
-/* on the job calculator */
+/* theme selection */
+function toggleTheme() {
+  if (document.getElementById("theme").href.includes("-light")) {
+    let moon = document.getElementById("moon");
+    moon.style.cursor = "pointer";
+    moon.style.filter = "grayscale(100%)";
+    moon.onclick = turnDark;
+  }
+}
 
+function turnDark() {
+  let theme = document.getElementById("theme");
+  theme.href = theme.href.replace("-light", "-dark");
+  toggleTheme();
+  let moon = document.getElementById("moon");
+  moon.reset
+}
+
+/* on the job calculator */
 function calcMinimumHours() {
   const annualHolidayHours = document.getElementById("annual-holiday-hours").value;
   const contractHours = document.getElementById("contract-hours").value;
@@ -15,7 +32,6 @@ function calcMinimumHours() {
 
 function adjustContractHours() {
   const annualHolidayHours = document.getElementById("annual-holiday-hours").value;
-  const contractHours = document.getElementById("contract-hours").value;
   const durationWeeks = document.getElementById("course-duration").value;
 
   const calcHolidayHours = annualHolidayHours * (durationWeeks / 52);
