@@ -1,5 +1,4 @@
 /* on the job calculator */
-
 function calcMinimumHours() {
   const annualHolidayHours = document.getElementById("annual-holiday-hours").value;
   const contractHours = document.getElementById("contract-hours").value;
@@ -15,9 +14,8 @@ function calcMinimumHours() {
 
 function adjustContractHours() {
   const annualHolidayHours = document.getElementById("annual-holiday-hours").value;
-  const contractHours = document.getElementById("contract-hours").value;
   const durationWeeks = document.getElementById("course-duration").value;
-
+  
   const calcHolidayHours = annualHolidayHours * (durationWeeks / 52);
   const minimumHoursMultiplier = 
       document.getElementById("minimum-otj-percent").value / 100;
@@ -26,7 +24,7 @@ function adjustContractHours() {
 
   // conditional checks in future?
   document.getElementById("contract-hours").value = 
-      (((plannedHours / minimumHoursMultiplier) + calcHolidayHours) / durationWeeks).toFixed(1);
+  (((plannedHours / minimumHoursMultiplier) + calcHolidayHours) / durationWeeks).toFixed(1);
   calcMinimumHours();
   animateSuccess();
 }
@@ -37,6 +35,13 @@ function animateSuccess() {
   
   /* void triggers "reflow" */
   void contract.offsetWidth
-
+  
   contract.classList.add("success"); 
+}
+
+/* theme selection based on browser preference */
+function checkTheme(dark) {
+  if (dark) {
+    goDark();
+  }
 }

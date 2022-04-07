@@ -1,0 +1,14 @@
+/* theme colours */
+:root {
+  /* shades derived from material.foundation.github.io/material-theme-builder */
+  --highlight: #ec008c;
+  --primary: #ffb0ce;
+  --primary-on: #640037;
+  --primary-container: #8d0050;
+  --primary-container-on: #ffd9e6;
+
+  --background: #191c1d;
+  --background-on: #e0e3e3;
+  --surface-variant: #49454F;
+  --surface-variant-on: #CAC4D0;
+}

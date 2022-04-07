@@ -5,13 +5,15 @@
     <meta name="author" content="Paul Greedo Foster">
     <meta name="viewport" content="width=device-width">
     <title>Für Elise</title>
-    <link rel="stylesheet" type="text/css" href="./fur-elise.css">
+    <link id="theme"
+          rel="stylesheet" type="text/css" href="./pink-light.css">
+    <link rel="stylesheet" type="text/css" href="./style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans">
   </head>
   
-  <body>
+  <body onLoad="checkTheme(window.matchMedia('(prefers-color-scheme: dark)').matches)">
     <script type="text/javascript" src="./fur-elise.js"></script>
-
+    
     <h3>Off-the-Job <dfn>(OtJ)</dfn> Hours Calculator<br>
       <small>(for recording in Smart Assessor)</small>
     </h3>
@@ -46,13 +48,13 @@
         <label for="planned-hours">Total Planned<br>
           <abbr title="Off-the-Job">OtJ</abbr> Hours</label>
         <input name="planned-hours" id="planned-hours" class="hours" 
-               type="number" step="0.1" min="0" value="760.0">
+               type="number" step="0.1" min="0" value="556.8">
       </div>
       <div class="form-pair">
         <label for="minimum-hours">Total Minimum<br>
           <abbr title="Off-the-Job">OtJ</abbr> Hours</label>
         <input name="minimum-hours" id="minimum-hours" class="hours" 
-               type="number" step="0.1" min="0" value="579.2" 
+               type="number" step="0.1" min="0" value="556.8" 
                readonly>
       </div>
       <div>
