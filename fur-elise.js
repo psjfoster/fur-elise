@@ -45,3 +45,8 @@ function checkTheme(dark) {
     goDark();
   }
 }
+
+function goDark() {
+  let theme = document.getElementById("theme");
+  theme.href = theme.href.replace("-light", "-dark");
+}
