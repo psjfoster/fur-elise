@@ -1,3 +1,21 @@
+function selectHoursWeeks(value) {
+  const annualHolidayHours = document.getElementById("annual-holiday-hours");
+  const annualHolidayWeeks = document.getElementById("annual-holiday-weeks");
+  
+  switch(value) {
+    case "hours":
+      calcHolidayHours();
+      annualHolidayWeeks.type = "hidden";
+      annualHolidayHours.type = "number";
+      break;
+    case "weeks":
+      calcHolidayWeeks();
+      annualHolidayHours.type = "hidden";
+      annualHolidayWeeks.type = "number";
+      break;
+  }
+}
+
 /* on the job calculator */
 function calcMinimumHours() {
   const annualHolidayHours = document.getElementById("annual-holiday-hours").value;
@@ -10,6 +28,25 @@ function calcMinimumHours() {
 
   document.getElementById("minimum-hours").value = 
       (((contractHours * durationWeeks) - calcHolidayHours) * minimumHoursMultiplier).toFixed(1);
+  calcHolidayWeeks;
+}
+
+function calcHolidayHours() {
+  const annualHolidayWeeks = document.getElementById("annual-holiday-weeks").value;
+  const contractHours = document.getElementById("contract-hours").value;
+
+  const annualHolidayHours = annualHolidayWeeks * contractHours;
+  document.getElementById("annual-holiday-hours").value = annualHolidayHours.toFixed(1);
+
+  calcMinimumHours();
+}
+
+function calcHolidayWeeks() {
+  const annualHolidayHours = document.getElementById("annual-holiday-hours").value;
+  const contractHours = document.getElementById("contract-hours").value;
+
+  const annualHolidayWeeks = annualHolidayHours / contractHours;
+  document.getElementById("annual-holiday-weeks").value = annualHolidayWeeks.toFixed(1);
 }
 
 function adjustContractHours() {
@@ -42,11 +79,7 @@ function animateSuccess() {
 /* theme selection based on browser preference */
 function checkTheme(dark) {
   if (dark) {
-    goDark();
+    let theme = document.getElementById("theme");
+    theme.href = theme.href.replace("-light", "-dark");
   }
-}
-
-function goDark() {
-  let theme = document.getElementById("theme");
-  theme.href = theme.href.replace("-light", "-dark");
 }
