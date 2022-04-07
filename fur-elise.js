@@ -39,36 +39,9 @@ function animateSuccess() {
   contract.classList.add("success"); 
 }
 
-/* theme selection */
+/* theme selection based on browser preference */
 function checkTheme(dark) {
   if (dark) {
     goDark();
   }
-}
-
-function chooseTheme(theme) {
-  if (theme.startsWith("-")) {
-    if (theme.endsWith("light")) {
-      goLight();
-    }
-    if (theme.endsWith("dark")) {
-      goDark();
-    }
-  } else {
-    let colour = theme.split("-")[0];
-      goColour(colour);
-  }
-}
-
-function goLight() {
-  let theme = document.getElementById("theme");
-  theme.href = theme.href.replace("-dark", "-light");
-}
-
-function goDark() {
-  let theme = document.getElementById("theme");
-  theme.href = theme.href.replace("-light", "-dark");
-}
-
-function goColour(colour) { 
 }
