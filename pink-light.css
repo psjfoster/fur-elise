@@ -12,3 +12,9 @@
   --surface-variant: #E7E0EC;
   --surface-variant-on: #49454F;
 }
+
+/* theme selection */
+theme#dark {
+  cursor: pointer;
+  filter: grayscale(100%);
+}

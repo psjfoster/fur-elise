@@ -11,15 +11,15 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans">
   </head>
   
-  <body onload="toggleTheme()">
+  <body onLoad="checkTheme(window.matchMedia('(prefers-color-scheme: dark)').matches)">
     <script type="text/javascript" src="./fur-elise.js"></script>
     <header>
       <h3>Off-the-Job <dfn>(OtJ)</dfn> Hours Calculator<br>
         <small>(for recording in Smart Assessor)</small>
       </h3>
       <theme-picker>
-        <p id="sun">&#x1F31E;</p>
-        <p id="moon" cursor="">&#x1F31D;</p>
+        <theme id="light" onclick="chooseTheme('-light')">&#x1F31E;</theme>
+        <theme id="dark" onclick="chooseTheme('-dark')">&#x1F31D;</theme>
       </theme-picker>
     </header>
 

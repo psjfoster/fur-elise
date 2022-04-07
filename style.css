@@ -9,8 +9,18 @@ body {
   margin-left: 1.5ch;
 }
 header {
+  align-items: flex-start;
   display: flex;
   justify-content: space-between;
+}
+theme-picker {
+  display: flex;
+  gap: 0.5ch;
+}
+theme-picker theme {
+  font-size: 200%;
+  margin: 0;
+  padding: 0;
 }
 h3 {
   font-size: 1.4rem;
@@ -19,14 +29,6 @@ h3 {
   margin: 0.5em 0 0.5em;
   text-transform: uppercase;
   min-width: 15rem;
-}
-theme-picker {
-  display: flex;
-}
-theme-picker p {
-  font-size: 200%;
-  margin: 0;
-  padding: 0;
 }
 abbr, dfn {
   font-style: normal;
